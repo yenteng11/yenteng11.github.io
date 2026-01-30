@@ -13,7 +13,6 @@
       --muted: #4b5563;
       --border: #e7e2d9;
       --accent: #5f7a67;
-      --accent2: #a9785a;
       --shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
       --radius: 18px;
     }
@@ -26,7 +25,7 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background:
         radial-gradient(900px 500px at 20% 10%, rgba(95,122,103,0.12), transparent 55%),
-        radial-gradient(900px 500px at 80% 0%, rgba(169,120,90,0.10), transparent 60%),
+        radial-gradient(900px 500px at 80% 0%, rgba(95,122,103,0.08), transparent 60%),
         var(--bg);
       color: var(--ink);
       line-height: 1.6;
@@ -41,7 +40,7 @@
       padding: 24px;
     }
 
-    /* Nav */
+    /* NAV */
     .nav{
       display: flex;
       justify-content: space-between;
@@ -57,7 +56,6 @@
       gap: 12px;
       font-size: 14px;
       color: var(--muted);
-      flex-wrap: wrap;
     }
 
     .navlinks a{
@@ -71,7 +69,7 @@
       color: var(--ink);
     }
 
-    /* Hero */
+    /* HERO */
     .hero{
       background: rgba(255,255,255,0.65);
       border: 1px solid var(--border);
@@ -108,6 +106,7 @@
       font-size: 13px;
     }
 
+    /* LAYOUT */
     .grid{
       display: grid;
       grid-template-columns: 1fr;
@@ -135,6 +134,7 @@
       margin-bottom: 10px;
     }
 
+    /* PROJECTS */
     .projects{
       display: grid;
       gap: 12px;
@@ -147,7 +147,10 @@
       background: linear-gradient(180deg, #ffffff, #fbfaf8);
     }
 
-    .project h3{ margin: 0 0 6px; font-size: 16px; }
+    .project h3{
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
 
     .meta{
       font-size: 13px;
@@ -160,6 +163,7 @@
       margin-top: 8px;
     }
 
+    /* SKILLS */
     .skills{
       display: flex;
       flex-wrap: wrap;
@@ -182,8 +186,8 @@
       padding: 22px 0 8px;
     }
 
-    /* Anchor spacing (if you ever add a sticky header later, this still helps) */
-    .anchor {
+    /* ANCHOR FIX */
+    .anchor{
       display: block;
       position: relative;
       top: -12px;
@@ -215,18 +219,9 @@
 
       <div class="chips">
         <span class="chip">📍 Canada</span>
-
-        <!-- Email is now plain text (NOT clickable) -->
         <span class="chip">yenteng7@gmail.com</span>
-
-        <a class="chip" href="https://github.com/yenteng11" target="_blank" rel="noopener">
-          GitHub
-        </a>
-
-        <!-- LinkedIn fixed: must include https:// -->
-        <a class="chip" href="https://www.linkedin.com/in/yen-teng111" target="_blank" rel="noopener">
-          LinkedIn
-        </a>
+        <a class="chip" href="https://github.com/yenteng11" target="_blank">GitHub</a>
+        <a class="chip" href="https://www.linkedin.com/in/yen-teng111" target="_blank">LinkedIn</a>
       </div>
     </section>
 
@@ -240,7 +235,6 @@
         </p>
       </section>
 
-      <!-- Anchor + Skills -->
       <span class="anchor" id="skills"></span>
       <section class="card">
         <h2>Skills</h2>
@@ -258,7 +252,6 @@
       </section>
     </div>
 
-    <!-- IMPORTANT FIX: dedicated anchor target for Projects -->
     <span class="anchor" id="projects"></span>
     <section class="card" style="margin-top:16px;">
       <h2>Projects</h2>
@@ -284,22 +277,18 @@
       </div>
     </section>
 
-    <!-- Contact anchor + section -->
     <span class="anchor" id="contact"></span>
     <section class="card" style="margin-top:16px;">
       <h2>Contact</h2>
       <p>
-        Email: yenteng7@gmail.com<br/>
-        GitHub:
-        <a href="https://github.com/yenteng11" target="_blank" rel="noopener">github.com/yenteng11</a><br/>
-        LinkedIn:
-        <a href="https://www.linkedin.com/in/yen-teng111" target="_blank" rel="noopener">linkedin.com/in/yen-teng111</a>
+        Email: <strong>yenteng7@gmail.com</strong>
       </p>
     </section>
 
     <footer>
       © <span id="year"></span> Yen Teng
     </footer>
+
   </div>
 
   <script>
