@@ -6,279 +6,247 @@
   <title>Yen Teng | Portfolio</title>
 
   <style>
-    :root {
-      --bg: #0f172a;
-      --card: #111827;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --accent: #38bdf8;
-      --border: rgba(148, 163, 184, 0.2);
+    :root{
+      /* Earthy monochrome palette */
+      --bg: #f6f3ee;        /* warm off-white */
+      --surface: #ffffff;   /* card */
+      --ink: #111111;       /* near-black */
+      --muted: #4b5563;     /* cool gray */
+      --border: #e7e2d9;    /* warm border */
+      --accent: #5f7a67;    /* sage */
+      --accent2: #a9785a;   /* clay */
+      --shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
+      --radius: 18px;
     }
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-    body {
+    body{
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #0b1022 0%, #0f172a 70%);
-      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(900px 500px at 20% 10%, rgba(95,122,103,0.12), transparent 55%),
+                  radial-gradient(900px 500px at 80% 0%, rgba(169,120,90,0.10), transparent 60%),
+                  var(--bg);
+      color: var(--ink);
       line-height: 1.6;
     }
 
-    a { color: var(--accent); text-decoration: none; }
+    a { color: inherit; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    .container {
+    .container{
       max-width: 980px;
       margin: 0 auto;
       padding: 24px;
     }
 
-    header {
-      padding: 56px 0 24px;
+    /* Top nav */
+    .nav{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0 24px;
     }
-
-    .top {
-      display: grid;
-      gap: 16px;
+    .brand{
+      font-weight: 700;
+      letter-spacing: 0.2px;
     }
-
-    .name {
-      font-size: 44px;
-      letter-spacing: 0.5px;
-      margin: 0;
-    }
-
-    .subtitle {
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: 18px;
-    }
-
-    .links {
+    .navlinks{
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 18px;
-    }
-
-    .pill {
-      border: 1px solid var(--border);
-      background: rgba(17, 24, 39, 0.6);
-      padding: 8px 12px;
-      border-radius: 999px;
       font-size: 14px;
+      color: var(--muted);
+    }
+    .navlinks a{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    .navlinks a:hover{
+      border-color: var(--border);
+      background: rgba(255,255,255,0.65);
+      text-decoration: none;
+      color: var(--ink);
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin-top: 18px;
-    }
-
-    @media (min-width: 900px) {
-      .grid { grid-template-columns: 1.1fr 0.9fr; }
-    }
-
-    section {
-      background: rgba(17, 24, 39, 0.65);
+    /* Hero */
+    .hero{
+      background: rgba(255,255,255,0.6);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 18px 18px;
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
       backdrop-filter: blur(6px);
     }
-
-    h2 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      letter-spacing: 0.3px;
+    .hero h1{
+      margin: 0;
+      font-size: 44px;
+      letter-spacing: -0.6px;
+      line-height: 1.1;
     }
-
-    p { margin: 10px 0; }
-
-    .projects {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    .project {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-      background: rgba(15, 23, 42, 0.55);
-    }
-
-    .project h3 {
-      margin: 0 0 6px;
-      font-size: 16px;
-    }
-
-    .meta {
-      margin: 0 0 8px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    ul {
+    .hero p{
       margin: 10px 0 0;
-      padding-left: 18px;
-      color: var(--text);
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 70ch;
     }
 
-    li { margin: 6px 0; }
-
-    .skills {
+    .chips{
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 8px;
+      margin-top: 16px;
+    }
+    .chip{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.85);
+      font-size: 13px;
+      color: var(--ink);
+    }
+    .chip .dot{
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(95,122,103,0.15);
     }
 
-    .tag {
+    .grid{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    @media (min-width: 900px){
+      .grid{ grid-template-columns: 1.2fr 0.8fr; }
+    }
+
+    .card{
+      background: var(--surface);
       border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.55);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 10px 20px rgba(17,17,17,0.05);
+    }
+
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .card p{ margin: 10px 0; }
+
+    /* Projects */
+    .projects{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .project{
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfaf8 100%);
+    }
+    .project h3{
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+    .meta{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .project ul{
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+    .project li{ margin: 6px 0; }
+
+    .pillrow{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .pill{
+      font-size: 12px;
       padding: 6px 10px;
       border-radius: 999px;
-      font-size: 13px;
-      color: var(--text);
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
     }
 
-    footer {
+    /* Accent buttons */
+    .btnrow{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 14px;
+    }
+    .btn.primary{
+      border-color: rgba(95,122,103,0.35);
+      background: rgba(95,122,103,0.08);
+    }
+    .btn:hover{
+      text-decoration: none;
+      filter: brightness(0.98);
+    }
+
+    footer{
       text-align: center;
       color: var(--muted);
-      padding: 24px 0 10px;
       font-size: 13px;
+      padding: 22px 0 8px;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <header>
-      <div class="top">
-        <div>
-          <h1 class="name">Yen Teng</h1>
-          <p class="subtitle">Engineering Student | Web & Software Development</p>
 
-          <div class="links">
-            <span class="pill">📍 Canada</span>
-            <a class="pill" href="https://github.com/yenteng11" target="_blank" rel="noopener">GitHub</a>
-            <!-- Replace with your LinkedIn if you have one -->
-            <a class="pill" href="[YOUR_LINKEDIN_URL]" target="_blank" rel="noopener">LinkedIn</a>
-            <!-- Optional: upload a PDF named resume.pdf to your repo root, then use /resume.pdf -->
-            <a class="pill" href="/resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
-            <a class="pill" href="mailto:[YOUR_EMAIL]">Email</a>
-          </div>
-        </div>
+    <div class="nav">
+      <div class="brand">Yen Teng</div>
+      <div class="navlinks">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
       </div>
+    </div>
 
-      <div class="grid">
-        <section>
-          <h2>About</h2>
-          <p>
-            I’m an undergraduate engineering student focused on building reliable software and clean,
-            user-friendly interfaces. I enjoy turning technical requirements into working systems,
-            from web apps to embedded/digital projects.
-          </p>
-          <p>
-            I’m especially interested in roles that combine front-end development with data and APIs,
-            and I like projects where I can ship something real and iterate fast.
-          </p>
-        </section>
-
-        <section>
-          <h2>Highlights</h2>
-          <ul>
-            <li>Comfortable with Git-based workflows, debugging, and iterative development.</li>
-            <li>Experience across web fundamentals (HTML/CSS/JS) and systems work (C++ / FPGA).</li>
-            <li>Strong preference for readable code, clear documentation, and practical results.</li>
-          </ul>
-        </section>
-      </div>
-    </header>
-
-    <section>
-      <h2>Projects</h2>
-
-      <div class="projects">
-        <div class="project">
-          <h3>Digital Dice Roller (FPGA)</h3>
-          <p class="meta">VHDL • DE10-Standard • 7-segment display</p>
-          <p>
-            Built a dice-rolling system on FPGA with timing control and display logic.
-          </p>
-          <ul>
-            <li>Implemented clock division and deterministic state logic.</li>
-            <li>Drove 7-segment display outputs for stable, readable results.</li>
-            <li>Debugged logic issues via simulation and iterative verification.</li>
-          </ul>
-          <!-- Optional link to code -->
-          <!-- <p><a href="[PROJECT_LINK]" target="_blank" rel="noopener">View code →</a></p> -->
-        </div>
-
-        <div class="project">
-          <h3>C++ File System Simulator</h3>
-          <p class="meta">C++ • OOP • Tree traversal</p>
-          <p>
-            Implemented a tree-based directory/file model with traversal and object-oriented design.
-          </p>
-          <ul>
-            <li>Built Directory/File classes and traversal logic (pre/in/post-order).</li>
-            <li>Focused on correctness, clean interfaces, and maintainable structure.</li>
-          </ul>
-        </div>
-
-        <div class="project">
-          <h3>Token Classifier</h3>
-          <p class="meta">C++ • Tokenization • Class hierarchy</p>
-          <p>
-            Designed a tokenizer and classifier using an object-oriented class hierarchy to organize tokens.
-          </p>
-          <ul>
-            <li>Implemented token parsing and classification with clear extensibility.</li>
-            <li>Emphasized robust edge-case handling and readable code.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section style="margin-top: 16px;">
-      <h2>Skills</h2>
-      <div class="skills">
-        <span class="tag">HTML</span>
-        <span class="tag">CSS</span>
-        <span class="tag">JavaScript</span>
-        <span class="tag">Git</span>
-        <span class="tag">C++</span>
-        <span class="tag">VHDL</span>
-        <span class="tag">MATLAB</span>
-        <span class="tag">PostgreSQL</span>
-        <span class="tag">MySQL</span>
-        <span class="tag">REST APIs</span>
-        <span class="tag">Node.js (basic)</span>
-      </div>
-    </section>
-
-    <section style="margin-top: 16px;">
-      <h2>Contact</h2>
+    <section class="hero">
+      <h1>Yen Teng</h1>
       <p>
-        Email: <a href="mailto:[YOUR_EMAIL]">[YOUR_EMAIL]</a><br />
-        GitHub: <a href="https://github.com/yenteng11" target="_blank" rel="noopener">github.com/yenteng11</a><br />
-        LinkedIn: <a href="[YOUR_LINKEDIN_URL]" target="_blank" rel="noopener">[YOUR_LINKEDIN_URL]</a>
+        Engineering student focused on building clean, reliable software and user-friendly interfaces.
+        Interested in web development, data-driven apps, and shipping practical tools.
       </p>
-    </section>
 
-    <footer>
-      © <span id="year"></span> Yen Teng • Built with GitHub Pages
-    </footer>
-  </div>
+      <div class="chips">
+        <span class="chip"><span class="dot"></span>Vancouver / Canada</span>
+        <a class="chip" href="https://github.com/yenteng11" target="_blank" rel="noopener">GitHub</a>
+        <!-- Replace these two if you want -->
+        <a class="chip" href="mailto:YOUR_EMAIL_HERE">Email</a>
+        <a class="chip" href="YOUR_LINKEDIN_HERE" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
 
-  <script>
-    // Auto-update year in footer
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
-
+      <div class="
