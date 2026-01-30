@@ -7,14 +7,13 @@
 
   <style>
     :root{
-      /* Earthy monochrome palette */
-      --bg: #f6f3ee;        /* warm off-white */
-      --surface: #ffffff;   /* card */
-      --ink: #111111;       /* near-black */
-      --muted: #4b5563;     /* cool gray */
-      --border: #e7e2d9;    /* warm border */
-      --accent: #5f7a67;    /* sage */
-      --accent2: #a9785a;   /* clay */
+      --bg: #f6f3ee;
+      --surface: #ffffff;
+      --ink: #111111;
+      --muted: #4b5563;
+      --border: #e7e2d9;
+      --accent: #5f7a67;
+      --accent2: #a9785a;
       --shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
       --radius: 18px;
     }
@@ -24,10 +23,11 @@
 
     body{
       margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(900px 500px at 20% 10%, rgba(95,122,103,0.12), transparent 55%),
-                  radial-gradient(900px 500px at 80% 0%, rgba(169,120,90,0.10), transparent 60%),
-                  var(--bg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 20% 10%, rgba(95,122,103,0.12), transparent 55%),
+        radial-gradient(900px 500px at 80% 0%, rgba(169,120,90,0.10), transparent 60%),
+        var(--bg);
       color: var(--ink);
       line-height: 1.6;
     }
@@ -41,56 +41,51 @@
       padding: 24px;
     }
 
-    /* Top nav */
     .nav{
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
       padding: 10px 0 24px;
     }
-    .brand{
-      font-weight: 700;
-      letter-spacing: 0.2px;
-    }
+
+    .brand{ font-weight: 700; }
+
     .navlinks{
       display: flex;
-      flex-wrap: wrap;
       gap: 12px;
       font-size: 14px;
       color: var(--muted);
     }
+
     .navlinks a{
       padding: 8px 10px;
       border-radius: 999px;
-      border: 1px solid transparent;
     }
+
     .navlinks a:hover{
-      border-color: var(--border);
-      background: rgba(255,255,255,0.65);
+      background: rgba(255,255,255,0.7);
       text-decoration: none;
       color: var(--ink);
     }
 
-    /* Hero */
     .hero{
-      background: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.65);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 26px;
+      padding: 28px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(6px);
     }
+
     .hero h1{
       margin: 0;
       font-size: 44px;
       letter-spacing: -0.6px;
-      line-height: 1.1;
     }
+
     .hero p{
-      margin: 10px 0 0;
+      margin-top: 10px;
       color: var(--muted);
-      font-size: 16px;
       max-width: 70ch;
     }
 
@@ -100,21 +95,13 @@
       gap: 10px;
       margin-top: 16px;
     }
+
     .chip{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
       padding: 9px 12px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.9);
       font-size: 13px;
-      color: var(--ink);
-    }
-    .chip .dot{
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(95,122,103,0.15);
     }
 
     .grid{
@@ -123,6 +110,7 @@
       gap: 16px;
       margin-top: 18px;
     }
+
     @media (min-width: 900px){
       .grid{ grid-template-columns: 1.2fr 0.8fr; }
     }
@@ -135,49 +123,45 @@
       box-shadow: 0 10px 20px rgba(17,17,17,0.05);
     }
 
-    .card h2{
-      margin: 0 0 10px;
-      font-size: 16px;
-      letter-spacing: 0.3px;
+    h2{
+      font-size: 15px;
       text-transform: uppercase;
+      letter-spacing: 0.3px;
       color: var(--muted);
+      margin-bottom: 10px;
     }
 
-    .card p{ margin: 10px 0; }
-
-    /* Projects */
     .projects{
       display: grid;
-      grid-template-columns: 1fr;
       gap: 12px;
     }
+
     .project{
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 14px;
-      background: linear-gradient(180deg, #ffffff 0%, #fbfaf8 100%);
+      background: linear-gradient(180deg, #ffffff, #fbfaf8);
     }
-    .project h3{
-      margin: 0 0 6px;
-      font-size: 16px;
-    }
-    .meta{
-      margin: 0 0 10px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .project ul{
-      margin: 10px 0 0;
-      padding-left: 18px;
-    }
-    .project li{ margin: 6px 0; }
 
-    .pillrow{
+    .project h3{ margin: 0 0 6px; font-size: 16px; }
+
+    .meta{
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .project ul{
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+
+    .skills{
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 10px;
     }
+
     .pill{
       font-size: 12px;
       padding: 6px 10px;
@@ -185,32 +169,6 @@
       border: 1px solid var(--border);
       background: #fff;
       color: var(--muted);
-    }
-
-    /* Accent buttons */
-    .btnrow{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .btn{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #fff;
-      font-size: 14px;
-    }
-    .btn.primary{
-      border-color: rgba(95,122,103,0.35);
-      background: rgba(95,122,103,0.08);
-    }
-    .btn:hover{
-      text-decoration: none;
-      filter: brightness(0.98);
     }
 
     footer{
@@ -237,16 +195,90 @@
     <section class="hero">
       <h1>Yen Teng</h1>
       <p>
-        Engineering student focused on building clean, reliable software and user-friendly interfaces.
-        Interested in web development, data-driven apps, and shipping practical tools.
+        Engineering student focused on building clean, reliable software and
+        user-friendly interfaces. Interested in web development, data-driven
+        applications, and practical systems.
       </p>
 
       <div class="chips">
-        <span class="chip"><span class="dot"></span>Vancouver / Canada</span>
-        <a class="chip" href="https://github.com/yenteng11" target="_blank" rel="noopener">GitHub</a>
-        <!-- Replace these two if you want -->
-        <a class="chip" href="mailto:YOUR_EMAIL_HERE">Email</a>
-        <a class="chip" href="YOUR_LINKEDIN_HERE" target="_blank" rel="noopener">LinkedIn</a>
+        <span class="chip">📍 Canada</span>
+        <a class="chip" href="mailto:yenteng7@gmail.com">yenteng7@gmail.com</a>
+        <a class="chip" href="https://github.com/yenteng11" target="_blank">GitHub</a>
+        <a class="chip" href="https://www.linkedin.com/in/yen-teng111" target="_blank">LinkedIn</a>
       </div>
+    </section>
 
-      <div class="
+    <div class="grid">
+      <section class="card">
+        <h2>About</h2>
+        <p>
+          I enjoy building systems that are simple, maintainable, and effective —
+          from web interfaces to C++ and FPGA-based projects. I’m comfortable
+          iterating quickly, debugging, and working with version control.
+        </p>
+      </section>
+
+      <section class="card" id="skills">
+        <h2>Skills</h2>
+        <div class="skills">
+          <span class="pill">HTML</span>
+          <span class="pill">CSS</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">Git</span>
+          <span class="pill">C++</span>
+          <span class="pill">VHDL</span>
+          <span class="pill">MATLAB</span>
+          <span class="pill">PostgreSQL</span>
+          <span class="pill">REST APIs</span>
+        </div>
+      </section>
+    </div>
+
+    <section class="card" id="projects" style="margin-top:16px;">
+      <h2>Projects</h2>
+
+      <div class="projects">
+        <div class="project">
+          <h3>Digital Dice Roller (FPGA)</h3>
+          <p class="meta">VHDL • DE10-Standard • 7-segment display</p>
+          <ul>
+            <li>Implemented clock division and deterministic state logic.</li>
+            <li>Designed stable 7-segment display output logic.</li>
+          </ul>
+        </div>
+
+        <div class="project">
+          <h3>C++ File System Simulator</h3>
+          <p class="meta">C++ • OOP • Tree traversal</p>
+          <ul>
+            <li>Built Directory and File classes using inheritance.</li>
+            <li>Implemented pre-order and post-order traversal logic.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="contact" style="margin-top:16px;">
+      <h2>Contact</h2>
+      <p>
+        Email:
+        <a href="mailto:yenteng7@gmail.com">yenteng7@gmail.com</a><br/>
+        GitHub:
+        <a href="https://github.com/yenteng11" target="_blank">github.com/yenteng11</a><br/>
+        LinkedIn:
+        <a href="https://www.linkedin.com/in/yen-teng111" target="_blank">
+          linkedin.com/in/yen-teng111
+        </a>
+      </p>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Yen Teng
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
