@@ -41,11 +41,13 @@
       padding: 24px;
     }
 
+    /* Nav */
     .nav{
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 0 24px;
+      gap: 12px;
     }
 
     .brand{ font-weight: 700; }
@@ -55,6 +57,7 @@
       gap: 12px;
       font-size: 14px;
       color: var(--muted);
+      flex-wrap: wrap;
     }
 
     .navlinks a{
@@ -68,6 +71,7 @@
       color: var(--ink);
     }
 
+    /* Hero */
     .hero{
       background: rgba(255,255,255,0.65);
       border: 1px solid var(--border);
@@ -177,6 +181,15 @@
       font-size: 13px;
       padding: 22px 0 8px;
     }
+
+    /* Anchor spacing (if you ever add a sticky header later, this still helps) */
+    .anchor {
+      display: block;
+      position: relative;
+      top: -12px;
+      visibility: hidden;
+      height: 0;
+    }
   </style>
 </head>
 
@@ -202,9 +215,18 @@
 
       <div class="chips">
         <span class="chip">📍 Canada</span>
-        <a class="chip" href="mailto:yenteng7@gmail.com">yenteng7@gmail.com</a>
-        <a class="chip" href="https://github.com/yenteng11" target="_blank">GitHub</a>
-        <a class="chip" href="https://www.linkedin.com/in/yen-teng111" target="_blank">LinkedIn</a>
+
+        <!-- Email is now plain text (NOT clickable) -->
+        <span class="chip">yenteng7@gmail.com</span>
+
+        <a class="chip" href="https://github.com/yenteng11" target="_blank" rel="noopener">
+          GitHub
+        </a>
+
+        <!-- LinkedIn fixed: must include https:// -->
+        <a class="chip" href="https://www.linkedin.com/in/yen-teng111" target="_blank" rel="noopener">
+          LinkedIn
+        </a>
       </div>
     </section>
 
@@ -218,7 +240,9 @@
         </p>
       </section>
 
-      <section class="card" id="skills">
+      <!-- Anchor + Skills -->
+      <span class="anchor" id="skills"></span>
+      <section class="card">
         <h2>Skills</h2>
         <div class="skills">
           <span class="pill">HTML</span>
@@ -234,7 +258,9 @@
       </section>
     </div>
 
-    <section class="card" id="projects" style="margin-top:16px;">
+    <!-- IMPORTANT FIX: dedicated anchor target for Projects -->
+    <span class="anchor" id="projects"></span>
+    <section class="card" style="margin-top:16px;">
       <h2>Projects</h2>
 
       <div class="projects">
@@ -258,17 +284,16 @@
       </div>
     </section>
 
-    <section class="card" id="contact" style="margin-top:16px;">
+    <!-- Contact anchor + section -->
+    <span class="anchor" id="contact"></span>
+    <section class="card" style="margin-top:16px;">
       <h2>Contact</h2>
       <p>
-        Email:
-        <a href="mailto:yenteng7@gmail.com">yenteng7@gmail.com</a><br/>
+        Email: yenteng7@gmail.com<br/>
         GitHub:
-        <a href="https://github.com/yenteng11" target="_blank">github.com/yenteng11</a><br/>
+        <a href="https://github.com/yenteng11" target="_blank" rel="noopener">github.com/yenteng11</a><br/>
         LinkedIn:
-        <a href="https://www.linkedin.com/in/yen-teng111" target="_blank">
-          linkedin.com/in/yen-teng111
-        </a>
+        <a href="https://www.linkedin.com/in/yen-teng111" target="_blank" rel="noopener">linkedin.com/in/yen-teng111</a>
       </p>
     </section>
 
