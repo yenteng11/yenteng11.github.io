@@ -117,7 +117,6 @@
       align-items: center;
     }
 
-    /* Buttons */
     button{
       border: 1px solid var(--border);
       background: rgba(255,255,255,0.06);
@@ -125,29 +124,67 @@
       padding: 10px 12px;
       border-radius: 12px;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 14px;
     }
     button:hover{ background: rgba(255,255,255,0.10); }
     button:active{ transform: translateY(1px); }
 
-    /* ✅ FIX: make the dropdown itself dark, and also the opened options */
-    select{
+    /* ---------- Custom dropdown (always dark) ---------- */
+    .dd{
+      position: relative;
+      display: inline-block;
+    }
+    .ddBtn{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+    .caret{
+      opacity: 0.9;
+      font-weight: 900;
+    }
+    .ddMenu{
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 260px;
+      background: #0b0d12;
       border: 1px solid var(--border);
-      background: #000;     /* black background */
-      color: var(--ink);    /* light text */
-      padding: 10px 12px;
+      border-radius: 14px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+      padding: 8px;
+      display: none;
+      z-index: 20;
+    }
+    .dd.open .ddMenu{ display: block; }
+    .ddItem{
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 10px 10px;
       border-radius: 12px;
+      color: var(--ink);
       cursor: pointer;
       font-weight: 700;
       font-size: 14px;
     }
-    select:hover{ background: #000; }
-
-    /* Some browsers use option styling when the list opens */
-    option{
-      background: #000;     /* black background for dropdown list */
-      color: var(--ink);
+    .ddItem span{
+      display: block;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+    .ddItem:hover{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.08);
+    }
+    .ddItem.active{
+      background: rgba(122,168,138,0.14);
+      border-color: rgba(122,168,138,0.28);
     }
 
     .gridWrap{
@@ -188,12 +225,10 @@
       background: var(--cellRevealed);
       border-color: rgba(255,255,255,0.08);
     }
-
     .cell.revealed.clear{
       background: var(--cellClear);
       border-color: rgba(122,168,138,0.35);
     }
-
     .cell.flagged{
       background: rgba(122,168,138,0.14);
     }
@@ -263,16 +298,27 @@
       </div>
 
       <div class="controls" style="margin-top: 10px;">
-        <label class="pill" style="gap:10px;">
+        <span class="pill" style="gap:10px;">
           Difficulty
-          <select id="difficulty">
-            <option value="easy">Easy (8×8, 10 mines)</option>
-            <option value="medium">Medium (12×12, 25 mines)</option>
-            <option value="hard">Hard (16×16, 40 mines)</option>
-          </select>
-        </label>
+          <div class="dd" id="dd">
+            <button class="ddBtn" id="ddBtn" type="button">
+              <span id="ddLabel">Easy (8×8)</span> <span class="caret">▾</span>
+            </button>
+            <div class="ddMenu" id="ddMenu" role="menu" aria-label="Difficulty menu">
+              <button class="ddItem active" type="button" data-value="easy">
+                Easy (8×8) <span>10 mines</span>
+              </button>
+              <button class="ddItem" type="button" data-value="medium">
+                Medium (12×12) <span>25 mines</span>
+              </button>
+              <button class="ddItem" type="button" data-value="hard">
+                Hard (16×16) <span>40 mines</span>
+              </button>
+            </div>
+          </div>
+        </span>
 
-        <button id="newGame">New Game</button>
+        <button id="newGame" type="button">New Game</button>
       </div>
 
       <div class="gridWrap">
@@ -296,9 +342,9 @@
     const $ = (id) => document.getElementById(id);
 
     const DIFFS = {
-      easy:   { rows: 8,  cols: 8,  mines: 10 },
-      medium: { rows: 12, cols: 12, mines: 25 },
-      hard:   { rows: 16, cols: 16, mines: 40 }
+      easy:   { rows: 8,  cols: 8,  mines: 10, label: "Easy (8×8)" },
+      medium: { rows: 12, cols: 12, mines: 25, label: "Medium (12×12)" },
+      hard:   { rows: 16, cols: 16, mines: 40, label: "Hard (16×16)" }
     };
 
     const inBounds = (r, c, rows, cols) => r >= 0 && r < rows && c >= 0 && c < cols;
@@ -324,6 +370,8 @@
 
     let timer = 0;
     let timerId = null;
+
+    let difficulty = "easy";
 
     function setStatus(text){ $("status").textContent = text; }
 
@@ -380,8 +428,6 @@
           };
 
           cell.el.className = "cell";
-          cell.el.setAttribute("role", "button");
-          cell.el.setAttribute("aria-label", `Cell ${r+1}, ${c+1}`);
           cell.el.dataset.r = r;
           cell.el.dataset.c = c;
 
@@ -583,10 +629,11 @@
     }
 
     function applyDifficulty(){
-      const diff = DIFFS[$("difficulty").value] || DIFFS.easy;
+      const diff = DIFFS[difficulty] || DIFFS.easy;
       rows = diff.rows;
       cols = diff.cols;
       mines = diff.mines;
+      $("ddLabel").textContent = diff.label;
     }
 
     function newGame(){
@@ -595,8 +642,34 @@
       updateMinesLeft();
     }
 
+    // ----- Custom dropdown logic -----
+    const dd = $("dd");
+    const ddBtn = $("ddBtn");
+    const ddMenu = $("ddMenu");
+
+    ddBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dd.classList.toggle("open");
+    });
+
+    ddMenu.addEventListener("click", (e) => {
+      const btn = e.target.closest(".ddItem");
+      if(!btn) return;
+
+      difficulty = btn.dataset.value;
+      for(const item of ddMenu.querySelectorAll(".ddItem")){
+        item.classList.toggle("active", item === btn);
+      }
+      dd.classList.remove("open");
+      newGame();
+    });
+
+    document.addEventListener("click", () => dd.classList.remove("open"));
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") dd.classList.remove("open");
+    });
+
     $("newGame").addEventListener("click", newGame);
-    $("difficulty").addEventListener("change", newGame);
 
     $("year").textContent = new Date().getFullYear();
     newGame();
