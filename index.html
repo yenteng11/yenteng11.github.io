@@ -8,12 +8,12 @@
   <style>
     :root{
       /* Dark theme (not pitch black) */
-      --bg: #0f1117;          /* page background */
-      --surface: #151a23;     /* card background */
-      --ink: #f3f4f6;         /* main text */
-      --muted: #b0b7c3;       /* secondary text */
-      --border: #2a3242;      /* borders */
-      --accent: #7aa88a;      /* accent */
+      --bg: #0f1117;
+      --surface: #151a23;
+      --ink: #f3f4f6;
+      --muted: #b0b7c3;
+      --border: #2a3242;
+      --accent: #7aa88a;
       --shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
       --radius: 18px;
     }
@@ -154,6 +154,14 @@
       background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
     }
 
+    .projectTop{
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
     .project h3{
       margin: 0 0 6px;
       font-size: 16px;
@@ -168,6 +176,25 @@
     .project ul{
       padding-left: 18px;
       margin-top: 8px;
+    }
+
+    /* NEW: project button */
+    .projectBtn{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .projectBtn:hover{
+      background: rgba(255,255,255,0.10);
+      text-decoration: none;
     }
 
     /* SKILLS */
@@ -227,7 +254,6 @@
         <span class="chip">yenteng7@gmail.com</span>
         <a class="chip" href="https://github.com/yenteng11" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a class="chip" href="https://www.linkedin.com/in/yen-teng111" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a class="chip" href="./minesweeper.html">Minesweeper</a>
       </div>
     </section>
 
@@ -277,8 +303,12 @@
 
       <div class="projects">
         <div class="project">
-          <h3>Digital Dice Roller (FPGA)</h3>
-          <p class="meta">VHDL • DE10-Standard • 7-segment display</p>
+          <div class="projectTop">
+            <div>
+              <h3>Digital Dice Roller (FPGA)</h3>
+              <p class="meta">VHDL • DE10-Standard • 7-segment display</p>
+            </div>
+          </div>
           <ul>
             <li>Implemented clock division and deterministic state logic.</li>
             <li>Designed stable 7-segment display output logic.</li>
@@ -286,11 +316,31 @@
         </div>
 
         <div class="project">
-          <h3>C++ File System Simulator</h3>
-          <p class="meta">C++ • OOP • Tree traversal</p>
+          <div class="projectTop">
+            <div>
+              <h3>C++ File System Simulator</h3>
+              <p class="meta">C++ • OOP • Tree traversal</p>
+            </div>
+          </div>
           <ul>
             <li>Built Directory and File classes using inheritance.</li>
             <li>Implemented pre-order and post-order traversal logic.</li>
+          </ul>
+        </div>
+
+        <!-- NEW: Minesweeper project card with button -->
+        <div class="project">
+          <div class="projectTop">
+            <div>
+              <h3>Minesweeper (Web Game)</h3>
+              <p class="meta">HTML • CSS • JavaScript</p>
+            </div>
+            <a class="projectBtn" href="./minesweeper.html" target="_blank" rel="noopener noreferrer">Play Minesweeper →</a>
+          </div>
+          <ul>
+            <li>Built a browser-based Minesweeper with safe first click and flood-reveal behavior.</li>
+            <li>Added flagging support (right-click / long-press) and a timer + mine counter.</li>
+            <li>Designed a dark UI theme to match the portfolio style.</li>
           </ul>
         </div>
       </div>
@@ -313,3 +363,4 @@
   </script>
 </body>
 </html>
+
