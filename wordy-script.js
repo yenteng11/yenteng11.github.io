@@ -97,36 +97,6 @@ function setupEventListeners() {
             handleKeyPress(key);
         }
     });
-    
-    // Admin modal
-    const modal = document.getElementById('adminModal');
-    const adminBtn = document.getElementById('adminBtn');
-    const closeBtn = document.querySelector('.close');
-    const setWordBtn = document.getElementById('setWordBtn');
-    
-    adminBtn.addEventListener('click', () => {
-        modal.style.display = 'block';
-        updateCurrentWordDisplay();
-    });
-    
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-    
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-    
-    setWordBtn.addEventListener('click', setNewWord);
-    
-    // Allow Enter key in admin input
-    document.getElementById('wordInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            setNewWord();
-        }
-    });
 }
 
 // Handle key press
@@ -303,45 +273,6 @@ function showMessage(text, duration, type = '') {
             messageEl.className = 'message';
         }, 300);
     }, duration);
-}
-
-// Admin: Set new word
-function setNewWord() {
-    const input = document.getElementById('wordInput');
-    const newWord = input.value.trim().toUpperCase();
-    
-    if (newWord.length !== wordLength) {
-        alert('Word must be exactly 5 letters!');
-        return;
-    }
-    
-    if (!/^[A-Z]+$/.test(newWord)) {
-        alert('Word must contain only letters!');
-        return;
-    }
-    
-    targetWord = newWord;
-    localStorage.setItem('wordyTarget', targetWord);
-    
-    // Reset game
-    currentRow = 0;
-    currentTile = 0;
-    gameOver = false;
-    
-    createBoard();
-    createKeyboard();
-    
-    input.value = '';
-    updateCurrentWordDisplay();
-    
-    showMessage('New word set! Game reset.', 2000);
-    document.getElementById('adminModal').style.display = 'none';
-}
-
-// Update current word display in admin panel
-function updateCurrentWordDisplay() {
-    const currentWordEl = document.getElementById('currentWord');
-    currentWordEl.textContent = `Current word: ${targetWord}`;
 }
 
 // Add shake animation to CSS
