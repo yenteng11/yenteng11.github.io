@@ -7,13 +7,14 @@
 
   <style>
     :root{
-      --bg: #f6f3ee;
-      --surface: #ffffff;
-      --ink: #111111;
-      --muted: #4b5563;
-      --border: #e7e2d9;
-      --accent: #5f7a67;
-      --shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
+      /* Dark theme (not pitch black) */
+      --bg: #0f1117;          /* page background */
+      --surface: #151a23;     /* card background */
+      --ink: #f3f4f6;         /* main text */
+      --muted: #b0b7c3;       /* secondary text */
+      --border: #2a3242;      /* borders */
+      --accent: #7aa88a;      /* accent */
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
       --radius: 18px;
     }
 
@@ -24,8 +25,8 @@
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background:
-        radial-gradient(900px 500px at 20% 10%, rgba(95,122,103,0.12), transparent 55%),
-        radial-gradient(900px 500px at 80% 0%, rgba(95,122,103,0.08), transparent 60%),
+        radial-gradient(900px 500px at 20% 10%, rgba(122,168,138,0.14), transparent 55%),
+        radial-gradient(900px 500px at 80% 0%, rgba(122,168,138,0.10), transparent 60%),
         var(--bg);
       color: var(--ink);
       line-height: 1.6;
@@ -64,14 +65,14 @@
     }
 
     .navlinks a:hover{
-      background: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.06);
       text-decoration: none;
       color: var(--ink);
     }
 
     /* HERO */
     .hero{
-      background: rgba(255,255,255,0.65);
+      background: rgba(21, 26, 35, 0.75);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 28px;
@@ -102,8 +103,14 @@
       padding: 9px 12px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.05);
       font-size: 13px;
+      color: var(--ink);
+    }
+
+    .chip:hover{
+      background: rgba(255,255,255,0.08);
+      text-decoration: none;
     }
 
     /* LAYOUT */
@@ -123,7 +130,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 18px;
-      box-shadow: 0 10px 20px rgba(17,17,17,0.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.35);
     }
 
     h2{
@@ -144,7 +151,7 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 14px;
-      background: linear-gradient(180deg, #ffffff, #fbfaf8);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
     }
 
     .project h3{
@@ -175,7 +182,7 @@
       padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: #fff;
+      background: rgba(255,255,255,0.04);
       color: var(--muted);
     }
 
@@ -218,8 +225,8 @@
       <div class="chips">
         <span class="chip">📍 Canada</span>
         <span class="chip">yenteng7@gmail.com</span>
-        <a class="chip" href="https://github.com/yenteng11" target="_blank">GitHub</a>
-        <a class="chip" href="https://www.linkedin.com/in/yen-teng111" target="_blank">LinkedIn</a>
+        <a class="chip" href="https://github.com/yenteng11" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="chip" href="https://www.linkedin.com/in/yen-teng111" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
     </section>
 
@@ -305,3 +312,4 @@
   </script>
 </body>
 </html>
+
