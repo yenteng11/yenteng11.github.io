@@ -15,6 +15,12 @@
       --accent: #7aa88a;
       --shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
       --radius: 18px;
+
+      /* NEW: cell colors */
+      --cell: rgba(255,255,255,0.06);          /* unrevealed */
+      --cellHover: rgba(255,255,255,0.10);
+      --cellRevealed: rgba(255,255,255,0.02);  /* revealed (numbers too) */
+      --cellClear: rgba(122,168,138,0.10);     /* revealed 0-cells */
     }
 
     *{ box-sizing: border-box; }
@@ -151,21 +157,30 @@
       height: 34px;
       border-radius: 10px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.06);
+      background: var(--cell);
       display: grid;
       place-items: center;
       font-weight: 800;
       user-select: none;
       cursor: pointer;
-      transition: background 120ms ease, transform 120ms ease;
+      transition: background 120ms ease, transform 120ms ease, border-color 120ms ease;
     }
-    .cell:hover{ background: rgba(255,255,255,0.10); }
+    .cell:hover{ background: var(--cellHover); }
     .cell:active{ transform: translateY(1px); }
 
+    /* NEW: revealed cells look "cleared" */
     .cell.revealed{
       cursor: default;
-      background: rgba(255,255,255,0.03);
+      background: var(--cellRevealed);
+      border-color: rgba(255,255,255,0.08);
     }
+
+    /* NEW: revealed 0-cells have an extra clear tint */
+    .cell.revealed.clear{
+      background: var(--cellClear);
+      border-color: rgba(122,168,138,0.35);
+    }
+
     .cell.flagged{
       background: rgba(122,168,138,0.14);
     }
@@ -190,7 +205,7 @@
       font-size: 12px;
     }
 
-    /* number colors (no hard rules, but helps readability) */
+    /* Number colors */
     .n1{ color: #8ab4f8; }
     .n2{ color: #7ee787; }
     .n3{ color: #ff7b72; }
@@ -266,7 +281,6 @@
   </div>
 
   <script>
-    // ---------- Utilities ----------
     const $ = (id) => document.getElementById(id);
 
     const DIFFS = {
@@ -289,9 +303,8 @@
       return out;
     }
 
-    // ---------- Game State ----------
     let rows = 8, cols = 8, mines = 10;
-    let board = [];          // cell objects
+    let board = [];
     let firstClick = true;
     let gameOver = false;
     let revealedCount = 0;
@@ -299,9 +312,6 @@
 
     let timer = 0;
     let timerId = null;
-
-    // Each cell:
-    // { r, c, mine, revealed, flagged, adj, el }
 
     function setStatus(text){ $("status").textContent = text; }
 
@@ -332,7 +342,6 @@
       return n >= 1 && n <= 8 ? `n${n}` : "";
     }
 
-    // ---------- Board Setup ----------
     function makeEmptyBoard(){
       board = [];
       revealedCount = 0;
@@ -364,21 +373,18 @@
           cell.el.dataset.r = r;
           cell.el.dataset.c = c;
 
-          // Left click: reveal
           cell.el.addEventListener("click", (e) => {
             e.preventDefault();
             onReveal(cell);
           });
 
-          // Right click: flag
           cell.el.addEventListener("contextmenu", (e) => {
             e.preventDefault();
             onFlag(cell);
           });
 
-          // Mobile long-press to flag
           let pressTimer = null;
-          cell.el.addEventListener("touchstart", (e) => {
+          cell.el.addEventListener("touchstart", () => {
             if(gameOver) return;
             pressTimer = setTimeout(() => {
               onFlag(cell);
@@ -403,7 +409,6 @@
     }
 
     function placeMinesAvoiding(safeR, safeC){
-      // Safe zone: the first clicked cell + its neighbors
       const safeSet = new Set();
       safeSet.add(`${safeR},${safeC}`);
       for(const [nr, nc] of neighbors(safeR, safeC, rows, cols)){
@@ -422,7 +427,6 @@
         placed++;
       }
 
-      // Compute adjacencies
       for(let r=0; r<rows; r++){
         for(let c=0; c<cols; c++){
           const cell = board[r][c];
@@ -439,7 +443,6 @@
       }
     }
 
-    // ---------- Gameplay ----------
     function revealCell(cell){
       if(cell.revealed || cell.flagged) return;
       cell.revealed = true;
@@ -447,6 +450,7 @@
 
       cell.el.classList.add("revealed");
       cell.el.textContent = "";
+      cell.el.classList.remove("clear");
 
       if(cell.mine){
         cell.el.classList.add("bomb");
@@ -458,12 +462,13 @@
         cell.el.textContent = String(cell.adj);
         cell.el.classList.add(numberClass(cell.adj));
       } else {
+        // NEW: mark empty spaces as "clear" so they change color
+        cell.el.classList.add("clear");
         cell.el.textContent = "";
       }
     }
 
     function floodReveal(startCell){
-      // BFS flood fill for zero-adj cells
       const q = [startCell];
       const seen = new Set([`${startCell.r},${startCell.c}`]);
 
@@ -481,8 +486,6 @@
           if(nxt.flagged) continue;
           seen.add(k);
 
-          // Always reveal neighbors of a zero cell
-          // But only continue flooding from zeros
           if(!nxt.revealed){
             if(nxt.adj === 0 && !nxt.mine){
               q.push(nxt);
@@ -508,7 +511,6 @@
       if(cell.revealed) return;
 
       if(cell.mine){
-        // Reveal mine -> lose
         revealCell(cell);
         endGame(false);
         return;
@@ -527,7 +529,6 @@
       if(gameOver) return;
       if(cell.revealed) return;
 
-      // If game hasn't started yet, allow flags without starting timer
       cell.flagged = !cell.flagged;
       cell.el.classList.toggle("flagged", cell.flagged);
       cell.el.textContent = cell.flagged ? "🚩" : "";
@@ -552,7 +553,6 @@
 
     function checkWin(){
       if(gameOver) return;
-      // Win if all non-mine cells are revealed
       const safeCells = rows * cols - mines;
       if(revealedCount >= safeCells){
         endGame(true);
@@ -571,7 +571,6 @@
       }
     }
 
-    // ---------- Init / Controls ----------
     function applyDifficulty(){
       const diff = DIFFS[$("difficulty").value] || DIFFS.easy;
       rows = diff.rows;
@@ -588,10 +587,7 @@
     $("newGame").addEventListener("click", newGame);
     $("difficulty").addEventListener("change", newGame);
 
-    // Footer year
     $("year").textContent = new Date().getFullYear();
-
-    // Start
     newGame();
   </script>
 </body>
