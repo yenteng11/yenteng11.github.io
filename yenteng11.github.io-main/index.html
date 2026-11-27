@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yen Teng | Portfolio</title>
+
+  <style>
+    :root{
+      /* Dark theme (not pitch black) */
+      --bg: #0f1117;
+      --surface: #151a23;
+      --ink: #f3f4f6;
+      --muted: #b0b7c3;
+      --border: #2a3242;
+      --accent: #7aa88a;
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body{
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 20% 10%, rgba(122,168,138,0.14), transparent 55%),
+        radial-gradient(900px 500px at 80% 0%, rgba(122,168,138,0.10), transparent 60%),
+        var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* NAV */
+    .nav{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0 24px;
+      gap: 12px;
+    }
+
+    .brand{ font-weight: 700; }
+
+    .navlinks{
+      display: flex;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .navlinks a{
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    .navlinks a:hover{
+      background: rgba(255,255,255,0.06);
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    /* HERO */
+    .hero{
+      background: rgba(21, 26, 35, 0.75);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero h1{
+      margin: 0;
+      font-size: 44px;
+      letter-spacing: -0.6px;
+    }
+
+    .hero p{
+      margin-top: 10px;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    .chips{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .chip{
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      font-size: 13px;
+      color: var(--ink);
+    }
+
+    .chip:hover{
+      background: rgba(255,255,255,0.08);
+      text-decoration: none;
+    }
+
+    /* LAYOUT */
+    .grid{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    @media (min-width: 900px){
+      .grid{ grid-template-columns: 1.2fr 0.8fr; }
+    }
+
+    .card{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+    }
+
+    h2{
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    /* PROJECTS */
+    .projects{
+      display: grid;
+      gap: 12px;
+    }
+
+    .project{
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    }
+
+    .projectTop{
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .project h3{
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+
+    .meta{
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .project ul{
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+
+    /* NEW: project button */
+    .projectBtn{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .projectBtn:hover{
+      background: rgba(255,255,255,0.10);
+      text-decoration: none;
+    }
+
+    /* SKILLS */
+    .skills{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+    }
+
+    footer{
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 22px 0 8px;
+    }
+
+    .anchor{
+      display: block;
+      position: relative;
+      top: -12px;
+      visibility: hidden;
+      height: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="nav">
+      <div class="brand">Yen Teng</div>
+      <div class="navlinks">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <h1>Yen Teng</h1>
+      <p>
+        Computer Engineering student at Simon Fraser University focused on building a
+        strong technical foundation and learning through hands-on projects.
+      </p>
+
+      <div class="chips">
+        <span class="chip">📍 Canada</span>
+        <span class="chip">yenteng7@gmail.com</span>
+        <a class="chip" href="https://github.com/yenteng11" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="chip" href="https://www.linkedin.com/in/yen-teng111" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>About</h2>
+
+        <p>
+          Through coursework and personal projects, I am developing foundational
+          skills in software development, digital systems, and basic web technologies.
+          I have worked with C++, hardware-oriented projects, and introductory web
+          development, and I am focused on learning how to design clear, reliable,
+          and maintainable systems.
+        </p>
+
+        <p>
+          Outside of academics, I enjoy staying active through basketball and golf,
+          and I'm a big sports fan who follows teams like the Seahawks, Canucks, and
+          Blue Jays. I'm very family-oriented and value strong relationships, and
+          long-term I hope to build something meaningful of my own. I enjoy
+          conversations about all kinds of sports and cultures, and I'm motivated by
+          the idea of traveling the world and learning from different places and
+          people.
+        </p>
+      </section>
+
+      <span class="anchor" id="skills"></span>
+      <section class="card">
+        <h2>Skills</h2>
+        <div class="skills">
+          <span class="pill">HTML</span>
+          <span class="pill">CSS</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">Git</span>
+          <span class="pill">C++</span>
+          <span class="pill">VHDL</span>
+          <span class="pill">MATLAB</span>
+          <span class="pill">PostgreSQL</span>
+          <span class="pill">REST APIs</span>
+        </div>
+      </section>
+    </div>
+
+    <span class="anchor" id="projects"></span>
+    <section class="card" style="margin-top:16px;">
+      <h2>Projects</h2>
+
+      <div class="projects">
+        <div class="project">
+          <div class="projectTop">
+            <div>
+              <h3>Wordy (Word Game)</h3>
+              <p class="meta">HTML • CSS • JavaScript • localStorage</p>
+            </div>
+            <a class="projectBtn" href="./wordy.html" target="_blank" rel="noopener noreferrer">Play Wordy →</a>
+          </div>
+          <ul>
+            <li>Created a Wordle-style game with 6 guesses and color-coded feedback.</li>
+            <li>Implemented admin panel to set custom daily words with localStorage persistence.</li>
+            <li>Designed smooth tile-flip animations and interactive on-screen keyboard.</li>
+          </ul>
+        </div>
+
+        <div class="project">
+          <div class="projectTop">
+            <div>
+              <h3>Minesweeper (Web Game)</h3>
+              <p class="meta">HTML • CSS • JavaScript</p>
+            </div>
+            <a class="projectBtn" href="./minesweeper.html" target="_blank" rel="noopener noreferrer">Play Minesweeper →</a>
+          </div>
+          <ul>
+            <li>Built a browser-based Minesweeper with safe first click and flood-reveal behavior.</li>
+            <li>Added flagging support (right-click / long-press) and a timer + mine counter.</li>
+            <li>Designed a dark UI theme to match the portfolio style.</li>
+          </ul>
+        </div>
+
+        <div class="project">
+          <div class="projectTop">
+            <div>
+              <h3>Digital Dice Roller (FPGA)</h3>
+              <p class="meta">VHDL • DE10-Standard • 7-segment display</p>
+            </div>
+          </div>
+          <ul>
+            <li>Implemented clock division and deterministic state logic.</li>
+            <li>Designed stable 7-segment display output logic.</li>
+          </ul>
+        </div>
+
+        <div class="project">
+          <div class="projectTop">
+            <div>
+              <h3>C++ File System Simulator</h3>
+              <p class="meta">C++ • OOP • Tree traversal</p>
+            </div>
+          </div>
+          <ul>
+            <li>Built Directory and File classes using inheritance.</li>
+            <li>Implemented pre-order and post-order traversal logic.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <span class="anchor" id="contact"></span>
+    <section class="card" style="margin-top:16px;">
+      <h2>Contact</h2>
+      <p>Email: <strong>yenteng7@gmail.com</strong></p>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Yen Teng
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

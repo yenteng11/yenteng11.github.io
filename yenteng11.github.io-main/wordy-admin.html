@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordy - Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #121213;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            background-color: #1a1a1b;
+            border: 1px solid #3a3a3c;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 32px;
+            letter-spacing: 0.2rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #b59f3b;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .current-word {
+            background-color: #2a2a2c;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .current-word h2 {
+            font-size: 14px;
+            color: #b0b7c3;
+            margin-bottom: 10px;
+        }
+
+        .current-word .word {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 0.3rem;
+            color: #538d4e;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #b0b7c3;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #2a2a2c;
+            border: 2px solid #3a3a3c;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            text-align: center;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #538d4e;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #538d4e;
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-bottom: 15px;
+        }
+
+        button:hover {
+            background-color: #6aaa64;
+        }
+
+        .play-link {
+            display: block;
+            text-align: center;
+            color: #b0b7c3;
+            text-decoration: none;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #3a3a3c;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .play-link:hover {
+            background-color: #2a2a2c;
+            color: #ffffff;
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .message.show {
+            opacity: 1;
+        }
+
+        .message.success {
+            background-color: #538d4e;
+        }
+
+        .message.error {
+            background-color: #b59f3b;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>WORDY</h1>
+        <p class="subtitle">🔒 Admin Panel</p>
+
+        <div class="current-word">
+            <h2>Current Word</h2>
+            <div class="word" id="currentWord">-----</div>
+        </div>
+
+        <label for="wordInput">Set New Word (5 letters)</label>
+        <input type="text" id="wordInput" maxlength="5" placeholder="ENTER">
+
+        <button id="setWordBtn">Set Word & Reset Game</button>
+
+        <a href="./wordy.html" class="play-link">→ Go to Game</a>
+
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        // Load current word on page load
+        function loadCurrentWord() {
+            const savedWord = localStorage.getItem('wordyTarget') || 'CRANE';
+            document.getElementById('currentWord').textContent = savedWord;
+        }
+
+        // Set new word
+        function setNewWord() {
+            const input = document.getElementById('wordInput');
+            const newWord = input.value.trim().toUpperCase();
+
+            if (newWord.length !== 5) {
+                showMessage('Word must be exactly 5 letters!', 'error');
+                return;
+            }
+
+            if (!/^[A-Z]+$/.test(newWord)) {
+                showMessage('Word must contain only letters!', 'error');
+                return;
+            }
+
+            localStorage.setItem('wordyTarget', newWord);
+            document.getElementById('currentWord').textContent = newWord;
+            input.value = '';
+            
+            showMessage('Word set successfully! 🎉', 'success');
+        }
+
+        // Show message
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message show ${type}`;
+
+            setTimeout(() => {
+                messageEl.classList.remove('show');
+            }, 3000);
+        }
+
+        // Event listeners
+        document.getElementById('setWordBtn').addEventListener('click', setNewWord);
+        document.getElementById('wordInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                setNewWord();
+            }
+        });
+
+        // Load current word when page loads
+        loadCurrentWord();
+    </script>
+</body>
+</html>
