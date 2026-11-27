@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
-    background-color: #082454;
+    background-color: #121213;
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -22,7 +22,7 @@ body {
 
 header {
     text-align: center;
-    border-bottom: 1px solid #526b91;
+    border-bottom: 1px solid #3a3a3c;
     padding-bottom: 20px;
     margin-bottom: 30px;
     position: relative;
@@ -68,19 +68,19 @@ h1 {
 .tile {
     width: 100%;
     aspect-ratio: 1;
-    border: 2px solid #526b91;
+    border: 2px solid #3a3a3c;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2rem;
     font-weight: bold;
     text-transform: uppercase;
-    background-color: #082454;
+    background-color: #121213;
     transition: all 0.3s ease;
 }
 
 .tile.filled {
-    border-color: #9bb1ce;
+    border-color: #565758;
     animation: pop 0.1s;
 }
 
@@ -90,8 +90,8 @@ h1 {
 }
 
 .tile.correct {
-    background-color: #237b42;
-    border-color: #237b42;
+    background-color: #538d4e;
+    border-color: #538d4e;
     animation: flip 0.5s ease;
 }
 
@@ -102,8 +102,8 @@ h1 {
 }
 
 .tile.absent {
-    background-color: #526b91;
-    border-color: #526b91;
+    background-color: #3a3a3c;
+    border-color: #3a3a3c;
     animation: flip 0.5s ease;
 }
 
@@ -129,7 +129,7 @@ h1 {
     height: 58px;
     border-radius: 4px;
     border: none;
-    background-color: #697b96;
+    background-color: #818384;
     color: #ffffff;
     font-size: 13px;
     font-weight: bold;
@@ -142,7 +142,7 @@ h1 {
 }
 
 .key:hover {
-    background-color: #526b91;
+    background-color: #9a9a9c;
 }
 
 .key.wide {
@@ -150,7 +150,7 @@ h1 {
 }
 
 .key.correct {
-    background-color: #237b42;
+    background-color: #538d4e;
 }
 
 .key.present {
@@ -158,7 +158,7 @@ h1 {
 }
 
 .key.absent {
-    background-color: #526b91;
+    background-color: #3a3a3c;
 }
 
 .message {
@@ -176,7 +176,7 @@ h1 {
 }
 
 .message.win {
-    background-color: #237b42;
+    background-color: #538d4e;
 }
 
 .message.lose {
@@ -196,10 +196,10 @@ h1 {
 }
 
 .modal-content {
-    background-color: #082454;
+    background-color: #121213;
     margin: 15% auto;
     padding: 30px;
-    border: 1px solid #526b91;
+    border: 1px solid #3a3a3c;
     border-radius: 8px;
     width: 90%;
     max-width: 400px;
@@ -230,8 +230,8 @@ h1 {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    background-color: #123b80;
-    border: 2px solid #526b91;
+    background-color: #1a1a1b;
+    border: 2px solid #3a3a3c;
     border-radius: 4px;
     color: #ffffff;
     font-size: 16px;
@@ -240,13 +240,13 @@ h1 {
 
 #wordInput:focus {
     outline: none;
-    border-color: #9bb1ce;
+    border-color: #565758;
 }
 
 #setWordBtn {
     width: 100%;
     padding: 12px;
-    background-color: #237b42;
+    background-color: #538d4e;
     border: none;
     border-radius: 4px;
     color: #ffffff;
@@ -257,16 +257,14 @@ h1 {
 }
 
 #setWordBtn:hover {
-    background-color: #206b39;
+    background-color: #6aaa64;
 }
 
 #currentWord {
     margin-top: 20px;
     padding: 15px;
-    background-color: #123b80;
+    background-color: #1a1a1b;
     border-radius: 4px;
     text-align: center;
     font-size: 18px;
 }
-
-body { border-top: 8px solid #c6cbd3; box-shadow: inset 0 5px #237b42; }
